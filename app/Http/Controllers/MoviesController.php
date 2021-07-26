@@ -15,16 +15,13 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $topRatedMovies = Http::withToken(config('services.tmdb.token')) ->
-        get('https://api.themoviedb.org/3/movie/top_rated')->json() ['results'];
-        
-        $nowPlayingMovies = Http::withToken(config('services.tmdb.token')) ->
-        get('https://api.themoviedb.org/3/movie/now_playing')->json() ['results'];
+        $topRatedMovies = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/top_rated')->json()['results'];
 
-        $genresArray = Http::withToken(config('services.tmdb.token')) ->
-        get('https://api.themoviedb.org/3/genre/movie/list')->json()['genres'];
+        $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/now_playing')->json()['results'];
 
-        $genres = collect($genresArray)->mapWithKeys(function($genre){
+        $genresArray = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/genre/movie/list')->json()['genres'];
+
+        $genres = collect($genresArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
 
@@ -65,7 +62,14 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $id)->json();
+        $discoverMovies = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/discover/movie')->json()['results'];
+
+
+        return view('movieDetails', [
+            'movie' => $movie,
+            'discoverMovies' => $discoverMovies,
+        ]);
     }
 
     /**

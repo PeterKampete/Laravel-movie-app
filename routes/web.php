@@ -15,7 +15,7 @@ use App\Http\Controllers\MoviesController;
 */
 
 Route::get('/', [MoviesController::class, 'index'])->name('movies.index');
-Route::get('/movies/movie', [MoviesController::class, 'index'])->name('movies.index');
+Route::get('/movies/{movie}', [MoviesController::class, 'show'])->name('movies.movieDetails');
 
 Route::get('/register', function () {
     return view('register');
