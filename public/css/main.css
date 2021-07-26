@@ -59,8 +59,8 @@ a:hover {
 .movie-card {
     background: #ffffff;
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 315px;
+    width: 70%;
+    max-width: 300px;
     margin: 2em;
     border-radius: 10px;
     display: inline-block;
@@ -96,10 +96,6 @@ a:hover {
     background: url("http://cdn.collider.com/wp-content/uploads/2017/05/blade-runner-2049-poster-ryan-gosling.jpeg");
     background-size: cover;
     background-position: 100% 80%;
-}
-
-.header-icon-container {
-    position: relative;
 }
 
 .header-icon {
